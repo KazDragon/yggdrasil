@@ -16,11 +16,12 @@ endif()
 enable_testing()
 
 #TODO: Clang Sanitizer options
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
 
 #TODO: check whether we are statically or dynamically linking to Boost
 add_definitions(-DBOOST_LOG_DYN_LINK)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_subdirectory(src/yggdrasil)
+add_subdirectory(test)
