@@ -32,6 +32,7 @@
 #include <boost/optional.hpp>
 #include <memory>
 #include <utility>
+#include <vector>
 
 namespace yggdrasil { namespace io {
     
@@ -60,9 +61,9 @@ public :
     //* =====================================================================
     /// \brief Writes a sequence of data into the datastream.
     //* =====================================================================
-    void write(char const *data, u32 length)
+    void write(std::vector<char> const &data)
     {
-        self_->write_(data, length);
+        self_->write_(data);
     }
 private :
     //* =====================================================================
@@ -84,7 +85,7 @@ private :
         //* =================================================================
         /// \brief Writes a sequence of data into the datastream.
         //* =================================================================
-        virtual void write_(char const *data, u32 length) = 0;
+        virtual void write_(std::vector<char> const &data) = 0;
     };
     
     //* =====================================================================
@@ -114,9 +115,9 @@ private :
         //* =================================================================
         /// \brief Writes a sequence of data into the datastream.
         //* =================================================================
-        virtual void write_(char const *data, u32 length) override
+        virtual void write_(std::vector<char> const &data) override
         {
-            model_.write(data, length);
+            model_.write(data);
         }
         
         Datastream model_;

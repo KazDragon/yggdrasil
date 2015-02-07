@@ -29,7 +29,6 @@
 
 #include "yggdrasil/types.hpp"
 #include <stdexcept>
-#include <string>
 #include <vector>
 
 //* =========================================================================
@@ -51,14 +50,14 @@ class test_datastream
 {
 public :
     char read();
-    void write(char const *data, yggdrasil::u32 length);
+    void write(std::vector<char> const &data);
     
-    void write_data_to_read(std::string const &text);
-    std::string read_data_written();
+    void write_data_to_read(std::vector<char> const &text);
+    std::vector<char> read_data_written();
     
 private :
-    std::string data_to_read_;
-    std::string data_written_;
+    std::vector<char> data_to_read_;
+    std::vector<char> data_written_;
 };
 
 #endif

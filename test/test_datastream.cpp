@@ -36,25 +36,27 @@ char test_datastream::read()
     
     char value = data_to_read_[0];
     
-    data_to_read_.erase(0, 1);
+    data_to_read_.erase(data_to_read_.begin(), data_to_read_.begin() + 1);
     
     return value;
 }
 
-void test_datastream::write(const char *data, yggdrasil::u32 length)
+void test_datastream::write(std::vector<char> const &data)
 {
-    std::copy(
-        data, data + length, std::back_inserter(data_written_));
+    data_written_.insert(
+        data_written_.end(),
+        data.begin(),
+        data.end());
 }
 
-std::string test_datastream::read_data_written()
+std::vector<char> test_datastream::read_data_written()
 {
-    std::string result;
+    std::vector<char> result;
     result.swap(data_written_);
     return result;
 }
 
-void test_datastream::write_data_to_read(const std::string &text)
+void test_datastream::write_data_to_read(std::vector<char> const &data)
 {
-    data_to_read_ += text;
+    data_to_read_.insert(data_to_read_.end(), data.begin(), data.end());
 }
